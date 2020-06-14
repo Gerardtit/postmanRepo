@@ -1,0 +1,35 @@
+[
+	{
+		"apiname" : "publishtraining"
+	},
+	{
+		"apiname" : "t47909intero"
+	},
+	{
+		"apiname" : "publishdependencycontainingdependecy"
+	},
+	{
+		"apiname" : "published-fragment"
+	},
+	{
+		"apiname" : "publishapiprojectoasyaml"
+	},
+	{
+		"apiname" : "publishapiprojectoasjson"
+	},
+	{
+		"apiname" : "publishapiprojectraml08"
+	},
+	{
+		"apiname" : "publishapiprojectraml10"
+	},
+	{
+		"apiname" : "publish-api-space"
+	},
+	{
+		"apiname" : "published-fragment"
+	},
+	{
+		"apiname" : "publishmultipledependencies"
+	}
+]

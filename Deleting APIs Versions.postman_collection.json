@@ -1,0 +1,159 @@
+{
+	"info": {
+		"_postman_id": "5b7dd8af-d95f-43db-b209-9dd30b97cbf5",
+		"name": "Deleting APIs Versions",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getLasPublishedVersion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "de1f65ac-e3af-4d38-9de3-f80e74d8e5b9",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.environment.set(\"version\", +jsonData.version.replace(\"1.0.\" , \"\")+1);",
+							"console.log(jsonData.version.replace(\"1.0.\" , \"\"));",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://anypoint.mulesoft.com/exchange/api/v2/assets/e3509fc4-bab1-4f94-bd2a-1b8e802334c1/{{apiname}}?includeSnapshots=true",
+					"protocol": "https",
+					"host": [
+						"anypoint",
+						"mulesoft",
+						"com"
+					],
+					"path": [
+						"exchange",
+						"api",
+						"v2",
+						"assets",
+						"e3509fc4-bab1-4f94-bd2a-1b8e802334c1",
+						"{{apiname}}"
+					],
+					"query": [
+						{
+							"key": "includeSnapshots",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "17528bf7-5a1f-47cf-8f4f-1a61f4e6e81f",
+						"exec": [
+							"var i = pm.environment.get(\"version\");",
+							"i --;",
+							"if(i > 50)",
+							"{",
+							"    postman.setNextRequest(\"Delete\");   ",
+							"}",
+							"else ",
+							"{",
+							"    postman.setNextRequest(null); // or next request name",
+							"}",
+							"pm.environment.set(\"version\",i);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "19a42667-cd50-4fcd-879c-5d3042863adc",
+						"exec": [
+							"pm.test(\"Successful Delete request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,204]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://anypoint.mulesoft.com/exchange/api/v1/organizations/e3509fc4-bab1-4f94-bd2a-1b8e802334c1/assets/e3509fc4-bab1-4f94-bd2a-1b8e802334c1/{{apiname}}/1.0.{{version}}",
+					"protocol": "https",
+					"host": [
+						"anypoint",
+						"mulesoft",
+						"com"
+					],
+					"path": [
+						"exchange",
+						"api",
+						"v1",
+						"organizations",
+						"e3509fc4-bab1-4f94-bd2a-1b8e802334c1",
+						"assets",
+						"e3509fc4-bab1-4f94-bd2a-1b8e802334c1",
+						"{{apiname}}",
+						"1.0.{{version}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "Elpatron1",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "studio-automation",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "5cf0874c-42ba-4943-81a5-974b6d5b64a5",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "4cf05494-fc94-4e88-94d0-ce0f4512dead",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
